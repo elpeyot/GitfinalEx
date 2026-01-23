@@ -1,5 +1,6 @@
 name: DevOps Action Workflow
 
+# Триггеры запуска workflow
 on:
   push:
     branches:
@@ -11,36 +12,52 @@ on:
         required: true
 
 jobs:
+  # Job 1: вывод приветствия и системной информации
   job1:
+    name: Print Hello and System Info
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: Print Hello
         run: echo "Hello"
+
       - name: Print Ubuntu version
         run: lsb_release -a
+
       - name: Print commit SHA
         run: echo "Commit SHA: ${{ github.sha }}"
 
+  # Job 2: вывод файлов и запуск скрипта
   job2:
+    name: Show Files and Run Script
     runs-on: ubuntu-latest
     needs: job1
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: List files in repo
         run: ls -l
-      - name: Print contents of files
+
+      - name: Print text files
         run: |
           cat 1.txt
           cat 2.txt
+          cat 3.txt
+          cat 4.txt
+
       - name: Run script
         run: ./run_files.sh
 
+  # Job 3: вывод переменных и секретов
   job3:
+    name: Print Env, Local Var and Secret
     runs-on: ubuntu-latest
     needs: job2
     steps:
-      - name: Print First Name from env
+      - name: Print First Name from input
         env:
           FIRST_NAME: ${{ github.event.inputs.first-name }}
         run: echo "First Name: $FIRST_NAME"
