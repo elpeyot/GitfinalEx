@@ -1,6 +1,5 @@
 name: DevOps Action Workflow
 
-# Триггеры workflow
 on:
   push:
     branches:
@@ -12,7 +11,6 @@ on:
         required: true
 
 jobs:
-  # Job 1: вывод приветствия и системной информации
   job1:
     name: Print Hello and System Info
     runs-on: ubuntu-latest
@@ -27,9 +25,8 @@ jobs:
         run: lsb_release -a
 
       - name: Print commit SHA
-        run: echo Commit SHA: ${{ github.sha }}
+        run: echo Commit\ SHA:\ ${{ github.sha }}
 
-  # Job 2: вывод файлов и запуск скрипта
   job2:
     name: Show Files and Run Script
     runs-on: ubuntu-latest
@@ -54,7 +51,6 @@ jobs:
       - name: Run script
         run: ./run_files.sh
 
-  # Job 3: вывод переменных и секретов
   job3:
     name: Print Env, Local Var and Secret
     runs-on: ubuntu-latest
@@ -63,12 +59,12 @@ jobs:
       - name: Print First Name from input
         env:
           FIRST_NAME: ${{ github.event.inputs.first-name }}
-        run: echo First Name: $FIRST_NAME
+        run: echo First\ Name:\ $FIRST_NAME
 
       - name: Print Last Name from local variable
         run: |
           LAST_NAME="Smith"
-          echo Last Name: $LAST_NAME
+          echo Last\ Name:\ $LAST_NAME
 
       - name: Print Phone number from secret
-        run: echo Phone: ${{ secrets.PHONE_NUMBER }}
+        run: echo Phone\ Number:\ ${{ secrets.PHONE_NUMBER }}
