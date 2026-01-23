@@ -1,3 +1,5 @@
 #!/bin/bash
-cat GitfinalEx/1.txt
-cat GitfinalEx/2.txt
+set -e
+
+cat 1.txt
+cat 2.txt
