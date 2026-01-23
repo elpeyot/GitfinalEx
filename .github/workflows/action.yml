@@ -1,6 +1,6 @@
 name: DevOps Action Workflow
 
-# Триггеры запуска workflow
+# Триггеры workflow
 on:
   push:
     branches:
@@ -21,13 +21,13 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Print Hello
-        run: echo "Hello"
+        run: echo Hello
 
       - name: Print Ubuntu version
         run: lsb_release -a
 
       - name: Print commit SHA
-        run: echo "Commit SHA: ${{ github.sha }}"
+        run: echo Commit SHA: ${{ github.sha }}
 
   # Job 2: вывод файлов и запуск скрипта
   job2:
@@ -48,6 +48,9 @@ jobs:
           cat 3.txt
           cat 4.txt
 
+      - name: Make script executable
+        run: chmod +x ./run_files.sh
+
       - name: Run script
         run: ./run_files.sh
 
@@ -60,12 +63,12 @@ jobs:
       - name: Print First Name from input
         env:
           FIRST_NAME: ${{ github.event.inputs.first-name }}
-        run: echo "First Name: $FIRST_NAME"
+        run: echo First Name: $FIRST_NAME
 
       - name: Print Last Name from local variable
         run: |
           LAST_NAME="Smith"
-          echo "Last Name: $LAST_NAME"
+          echo Last Name: $LAST_NAME
 
       - name: Print Phone number from secret
-        run: echo "Phone: ${{ secrets.PHONE_NUMBER }}"
+        run: echo Phone: ${{ secrets.PHONE_NUMBER }}
