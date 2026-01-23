@@ -52,20 +52,20 @@ jobs:
         run: ./run_files.sh
 
 job3:
-  name: Print Env, Local Var and Secret
+  name: Print Env, Var and Secret
   runs-on: ubuntu-latest
   needs: job2
-  environment: devops   # ← ВАЖНО
+  environment: devops
 
   steps:
     - name: Print First Name (env)
       env:
         FIRST_NAME: ${{ github.event.inputs.first-name }}
-      run: echo "First Name: $FIRST_NAME"
+      run: echo First\ Name:\ $FIRST_NAME
 
     - name: Print Last Name (environment variable)
-      run: echo "Last Name: ${{ vars.LAST_NAME }}"
+      run: echo Last\ Name:\ ${{ vars.LAST_NAME }}
 
     - name: Print Phone Number (secret)
-      run: echo "Phone Number: ${{ secrets.PHONE_NUMBER }}"
+      run: echo Phone\ Number:\ ${{ secrets.PHONE_NUMBER }}
 
